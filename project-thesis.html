@@ -67,11 +67,34 @@
     .stack-chip{font-size:0.8rem;color:var(--text);background:var(--card);border:1px solid var(--border2);padding:0.4rem 1rem;border-radius:2px;transition:border-color 0.2s,color 0.2s}
     .stack-chip:hover{border-color:var(--pink);color:var(--pink2)}
 
-    /* FINDINGS / PLACEHOLDER CARDS */
-    .placeholder-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .placeholder-card{background:var(--card);border:1px dashed var(--border2);border-radius:2px;padding:1.75rem;display:flex;flex-direction:column;gap:0.5rem}
-    .placeholder-card .ph-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3)}
-    .placeholder-card .ph-text{font-size:0.82rem;color:var(--text3);font-style:italic}
+    /* FINDING CARDS */
+    .findings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2.5rem}
+    .finding-card{background:var(--card);border:1px solid rgba(232,97,154,0.3);border-radius:2px;padding:1.75rem;display:flex;flex-direction:column;gap:0.5rem;transition:border-color 0.25s}
+    .finding-card:hover{border-color:var(--pink)}
+    .finding-card.pending{border-style:dashed;border-color:var(--border2)}
+    .finding-card.pending:hover{border-color:var(--border2)}
+    .finding-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--pink);font-weight:500}
+    .finding-label.muted{color:var(--text3)}
+    .finding-text{font-size:0.85rem;color:var(--text2);line-height:1.75}
+    .finding-text.muted{color:var(--text3);font-style:italic}
+
+    /* WIP BADGE */
+    .wip-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,97,154,0.08);border:1px solid rgba(232,97,154,0.25);border-radius:2px;padding:0.5rem 1rem;margin-bottom:1.75rem}
+    .wip-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);display:inline-block;animation:pulse 2s infinite;flex-shrink:0}
+    .wip-text{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--pink);font-weight:500}
+
+    /* REFERENCES */
+    .ref-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
+    .ref-list li{font-size:0.88rem;color:var(--text2);line-height:1.8;padding-left:1.5rem;position:relative}
+    .ref-list li::before{content:counter(ref-counter);counter-increment:ref-counter;position:absolute;left:0;top:0.05em;font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:var(--pink);font-weight:400}
+    .ref-list{counter-reset:ref-counter}
+    .ref-list li em{color:var(--text3);font-style:italic}
+
+    /* FIGURE */
+    figure{margin:0}
+    figure img{width:100%;border-radius:2px;border:1px solid var(--border2);display:block}
+    figcaption{font-size:0.78rem;color:var(--text3);margin-top:0.75rem;line-height:1.6}
+    figcaption strong{color:var(--text2)}
 
     .divider{height:1px;background:var(--border);margin:4rem 0}
     .next-project{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
@@ -90,7 +113,7 @@
       .project-hero{padding:6rem 1.5rem 3rem}
       .pdf-banner{padding:1.25rem 1.5rem}
       .project-content{padding:3rem 1.5rem}
-      .placeholder-grid{grid-template-columns:1fr}
+      .findings-grid{grid-template-columns:1fr}
       .next-project{padding:2rem 1.5rem}
       footer{flex-direction:column;gap:0.5rem;text-align:center}
     }
@@ -127,11 +150,6 @@
     </div>
   </div>
   <div class="project-actions">
-    <!--
-      TO ADD YOUR PDF:
-      1. Upload Draft_Thesis.pdf to your GitHub repo
-      2. The button below will open it in a new tab automatically
-    -->
     <a href="Draft_Thesis.pdf" target="_blank" class="btn-primary">📄 View Draft PDF ↗</a>
     <a href="index.html#contact" class="btn-ghost">Get in touch</a>
   </div>
@@ -159,7 +177,6 @@
       <p>An equilibrium model of the Nordic power sector is adapted to model nuclear plants' flexibility as a resource stock to be deployed over the year. The study investigates how treating nuclear fuel cycles as a dispatchable resource — rather than a fixed baseload — changes our understanding of nuclear power's role in a grid with high renewable energy penetration.</p>
       <p>The Nordic electricity market is a compelling context for this question: it combines hydro-dominated generation, significant wind expansion, and a mix of nuclear capacities across Sweden and Finland, creating unique dynamics around flexibility and pricing.</p>
     </div>
-
     <div class="rq-box">
       <div class="rq-label">Primary research question</div>
       <div class="rq-text">"How can modelling of nuclear fuel cycles as a resource stock deployed over the year impact the assessment of nuclear-power-plant flexibility and the overall equilibrium of the Nordic electricity market under high VRE penetration?"</div>
@@ -173,50 +190,51 @@
     <p class="block-label">Methodology</p>
     <h2 class="block-title">Approach & methods</h2>
     <div class="body-text">
-      <p>This thesis develops a deterministic partial-equilibrium model of the Swedish power system to investigate how modelling nuclear fuel cycles as a depletable resource stock, — analogous to a hydropower reservoir — affects assessments of nuclear flexibility under high variable renewable energy (VRE) penetration. The model covers Sweden's four bidding zones at hourly resolution across a full year, formulated as a quadratic programme maximising social welfare under perfect competition and implemented in GAMS using the CPLEX solver. Two model variants are compared across 2030, 2040, and 2050 VRE scenarios: a conventional ramp-rate-only representation and a novel fuel-cycle formulation incorporating both a finite fuel-energy stock constraint and a cycling-operations budget. The shadow prices on these constraints are interpreted as the fuel value and flexibility value respectively — direct analogues to the water value in hydropower scheduling — providing a new lens for quantifying the economic cost of nuclear flexibility in hydro-dominated systems.</p>
+      <p>This thesis develops a deterministic partial-equilibrium model of the Swedish power system to investigate how modelling nuclear fuel cycles as a depletable resource stock — analogous to a hydropower reservoir — affects assessments of nuclear flexibility under high variable renewable energy (VRE) penetration.</p>
+      <p>The model covers Sweden's four bidding zones at hourly resolution across a full year, formulated as a quadratic programme maximising social welfare under perfect competition and implemented in GAMS using the CPLEX solver. Two model variants are compared across 2030, 2040, and 2050 VRE scenarios: a conventional ramp-rate-only representation and a novel fuel-cycle formulation incorporating both a finite fuel-energy stock constraint and a cycling-operations budget.</p>
+      <p>The shadow prices on these constraints are interpreted as the fuel value and flexibility value respectively — direct analogues to the water value in hydropower scheduling — providing a new lens for quantifying the economic cost of nuclear flexibility in hydro-dominated systems.</p>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- PRELIMINARY FINDINGS -->
+  <!-- FINDINGS -->
   <div class="content-block reveal">
     <p class="block-label">Findings</p>
     <h2 class="block-title">Results & insights</h2>
 
-    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,97,154,0.08);border:1px solid rgba(232,97,154,0.25);border-radius:2px;padding:0.5rem 1rem;margin-bottom:1.75rem;">
-      <span style="width:6px;height:6px;border-radius:50%;background:var(--pink);display:inline-block;animation:pulse 2s infinite;flex-shrink:0;"></span>
-      <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--pink);font-weight:500;">Work in progress — results are preliminary and subject to change</span>
+    <div class="wip-badge">
+      <span class="wip-dot"></span>
+      <span class="wip-text">Work in progress — results are preliminary and subject to change</span>
     </div>
 
     <div class="body-text" style="margin-bottom:2rem;">
       <p>The analysis compares three model calibrations — Model R (ramp-rate only), Model F Old, and Model F New (fuel-cycle constrained) — across nuclear generation, zonal prices, and fuel scarcity premiums. Three early findings stand out from the baseline calibration.</p>
     </div>
 
-    <div class="placeholder-grid" style="margin-bottom:2.5rem;">
-      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
-        <div class="ph-label" style="color:var(--pink);">Finding 1 — Nuclear overestimation</div>
-        <div class="ph-text" style="color:var(--text2);font-style:normal;">Model R over-generates at 68.1 TWh, exceeding the 2018 observed value of 63 TWh. Imposing a fuel budget in Model F New brings output exactly to 63 TWh, suggesting ramp-rate-only models systematically overestimate nuclear generation.</div>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <div class="finding-label">Finding 1 — Nuclear overestimation</div>
+        <div class="finding-text">Model R over-generates at 68.1 TWh, exceeding the 2018 observed value of 63 TWh. Imposing a fuel budget in Model F New brings output exactly to 63 TWh, suggesting ramp-rate-only models systematically overestimate nuclear generation.</div>
       </div>
-      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
-        <div class="ph-label" style="color:var(--pink);">Finding 2 — Fuel scarcity premium</div>
-        <div class="ph-text" style="color:var(--text2);font-style:normal;">Model F New yields a fuel scarcity value of 1.42 EUR/MWh per TWh constrained — a cleaner estimate of the opportunity cost of burning fuel today versus saving it for higher-price periods, directly analogous to the water value in hydro scheduling.</div>
+      <div class="finding-card">
+        <div class="finding-label">Finding 2 — Fuel scarcity premium</div>
+        <div class="finding-text">Model F New yields a fuel scarcity value of 1.42 EUR/MWh per TWh constrained — a cleaner estimate of the opportunity cost of burning fuel today versus saving it for higher-price periods, directly analogous to the water value in hydro scheduling.</div>
       </div>
-      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
-        <div class="ph-label" style="color:var(--pink);">Finding 3 — Price effects &amp; network impact</div>
-        <div class="ph-text" style="color:var(--text2);font-style:normal;">The fuel constraint raises average prices by ~20% over Model R (42.90 vs 35.66 EUR/MWh). SE4 prices nearly converge with SE1–SE3 under the fuel-cycle model, hinting that nuclear constraints subtly reduce north–south congestion pressure.</div>
+      <div class="finding-card">
+        <div class="finding-label">Finding 3 — Price effects & network impact</div>
+        <div class="finding-text">The fuel constraint raises average prices by ~20% over Model R (42.90 vs 35.66 EUR/MWh). SE4 prices nearly converge with SE1–SE3 under the fuel-cycle model, hinting that nuclear constraints subtly reduce north–south congestion pressure.</div>
       </div>
-      <div class="placeholder-card" style="border-style:dashed;">
-        <div class="ph-label">Scenario analysis</div>
-        <div class="ph-text">Comparative results across 2030, 2040, and 2050 VRE penetration scenarios are ongoing. Full findings will be available upon thesis completion.</div>
+      <div class="finding-card pending">
+        <div class="finding-label muted">Scenario analysis</div>
+        <div class="finding-text muted">Comparative results across 2030, 2040, and 2050 VRE penetration scenarios are ongoing. Full findings will be available upon thesis completion.</div>
       </div>
     </div>
 
-    <!-- Results figure -->
-    <figure style="margin:0;">
-      <img src="results-chart.png" alt="Model R vs Model F comparative analysis — nuclear generation, average prices, fuel scarcity premium, and three-way comparison table" style="width:100%;border-radius:2px;border:1px solid var(--border2);display:block;" />
-      <figcaption style="font-size:0.78rem;color:var(--text3);margin-top:0.75rem;line-height:1.6;">
-        <strong style="color:var(--text2);">Figure 1.</strong> Full three-way comparative analysis (Model R · Model F Old · Model F New) across nuclear generation output, average zonal prices, total generation mix, fuel scarcity premium, and key calibration metrics. Model F New is calibrated to the 2018 observed nuclear output of 63 TWh. <em>Results are preliminary.</em>
+    <figure>
+      <img src="results-chart.png" alt="Model R vs Model F comparative analysis" />
+      <figcaption>
+        <strong>Figure 1.</strong> Full three-way comparative analysis (Model R · Model F Old · Model F New) across nuclear generation output, average zonal prices, total generation mix, fuel scarcity premium, and key calibration metrics. Model F New is calibrated to the 2018 observed nuclear output of 63 TWh. <em>Results are preliminary.</em>
       </figcaption>
     </figure>
   </div>
@@ -240,19 +258,17 @@
 
   <div class="divider"></div>
 
-  <!-- REFERENCES -->
+  <!-- REFERENCES — single clean list, no duplicates -->
   <div class="content-block reveal">
     <p class="block-label">References</p>
     <h2 class="block-title">Key sources</h2>
-    <div class="body-text">
-      <ol style="color:var(--text2);font-size:0.9rem;line-height:1.9;padding-left:1.2rem;">
-        <li>Blanchard, A. & Massol, O. (2025). "The value of nuclear power plants' flexibility: A multistage stochastic dynamic programming approach." <em>European Journal of Operational Research.</em> DOI: 10.1016/j.ejor.2025.04.007</li>
-        <li>Chen, Y. et al. (2020). <em>Analysis of Environmental Policy in the Power Sector: Equilibrium Methods and Bi-Level Modeling.</em> Springer. DOI: 10.1007/978-3-030-44866-0</li>
-        <li>Crampes, C. & Moreaux, M. (2001). "Water resource and power generation." <em>International Journal of Industrial Organization,</em> 19(6), 975–997. DOI: 10.1016/S0167-7187(99)00052-1</li>
-        <li>Jenkins, J. D. et al. (2018). "The benefits of nuclear flexibility in power system operations with renewable energy." <em>Applied Energy,</em> 222, 872–884. DOI: 10.1016/j.apenergy.2018.03.002</li>
-        <li>IAEA (2018). <em>Non-baseload Operation in Nuclear Power Plants: Load Following and Frequency Control Modes of Flexible Operation.</em> IAEA Nuclear Energy Series NP-T-3.23. Vienna: IAEA.</li>
-      </ol>
-    </div>
+    <ol class="ref-list">
+      <li>Blanchard, A. & Massol, O. (2025). "The value of nuclear power plants' flexibility: A multistage stochastic dynamic programming approach." <em>European Journal of Operational Research.</em> DOI: 10.1016/j.ejor.2025.04.007</li>
+      <li>Chen, Y. et al. (2020). <em>Analysis of Environmental Policy in the Power Sector: Equilibrium Methods and Bi-Level Modeling.</em> Springer. DOI: 10.1007/978-3-030-44866-0</li>
+      <li>Crampes, C. & Moreaux, M. (2001). "Water resource and power generation." <em>International Journal of Industrial Organization,</em> 19(6), 975–997. DOI: 10.1016/S0167-7187(99)00052-1</li>
+      <li>Jenkins, J. D. et al. (2018). "The benefits of nuclear flexibility in power system operations with renewable energy." <em>Applied Energy,</em> 222, 872–884. DOI: 10.1016/j.apenergy.2018.03.002</li>
+      <li>IAEA (2018). <em>Non-baseload Operation in Nuclear Power Plants: Load Following and Frequency Control Modes of Flexible Operation.</em> IAEA Nuclear Energy Series NP-T-3.23. Vienna: IAEA.</li>
+    </ol>
   </div>
 
 </div>
@@ -266,7 +282,7 @@
 </div>
 
 <footer>
-  <p>© 2025 Aparna Ramesh Pai <span class="footer-dot">·</span> All rights reserved</p>
+  <p>© 2026 Aparna Ramesh Pai <span class="footer-dot">·</span> All rights reserved</p>
   <p>Stockholm, Sweden <span class="footer-dot">·</span> <a href="index.html" style="color:var(--text3);text-decoration:none">Back to portfolio</a></p>
 </footer>
 
