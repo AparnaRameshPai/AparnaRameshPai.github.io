@@ -179,28 +179,46 @@
 
   <div class="divider"></div>
 
-  <!-- PRELIMINARY FINDINGS — placeholder cards -->
+  <!-- PRELIMINARY FINDINGS -->
   <div class="content-block reveal">
     <p class="block-label">Findings</p>
     <h2 class="block-title">Results & insights</h2>
-    <div class="placeholder-grid">
-      <div class="placeholder-card">
-        <div class="ph-label">Finding 1</div>
-        <div class="ph-text">Add your key findings here as research progresses</div>
+
+    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,97,154,0.08);border:1px solid rgba(232,97,154,0.25);border-radius:2px;padding:0.5rem 1rem;margin-bottom:1.75rem;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--pink);display:inline-block;animation:pulse 2s infinite;flex-shrink:0;"></span>
+      <span style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--pink);font-weight:500;">Work in progress — results are preliminary and subject to change</span>
+    </div>
+
+    <div class="body-text" style="margin-bottom:2rem;">
+      <p>The analysis compares three model calibrations — Model R (ramp-rate only), Model F Old, and Model F New (fuel-cycle constrained) — across nuclear generation, zonal prices, and fuel scarcity premiums. Three early findings stand out from the baseline calibration.</p>
+    </div>
+
+    <div class="placeholder-grid" style="margin-bottom:2.5rem;">
+      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
+        <div class="ph-label" style="color:var(--pink);">Finding 1 — Nuclear overestimation</div>
+        <div class="ph-text" style="color:var(--text2);font-style:normal;">Model R over-generates at 68.1 TWh, exceeding the 2018 observed value of 63 TWh. Imposing a fuel budget in Model F New brings output exactly to 63 TWh, suggesting ramp-rate-only models systematically overestimate nuclear generation.</div>
       </div>
-      <div class="placeholder-card">
-        <div class="ph-label">Finding 2</div>
-        <div class="ph-text">Add your key findings here as research progresses</div>
+      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
+        <div class="ph-label" style="color:var(--pink);">Finding 2 — Fuel scarcity premium</div>
+        <div class="ph-text" style="color:var(--text2);font-style:normal;">Model F New yields a fuel scarcity value of 1.42 EUR/MWh per TWh constrained — a cleaner estimate of the opportunity cost of burning fuel today versus saving it for higher-price periods, directly analogous to the water value in hydro scheduling.</div>
       </div>
-      <div class="placeholder-card">
-        <div class="ph-label">Finding 3</div>
-        <div class="ph-text">Add your key findings here as research progresses</div>
+      <div class="placeholder-card" style="border-color:rgba(232,97,154,0.3);border-style:solid;">
+        <div class="ph-label" style="color:var(--pink);">Finding 3 — Price effects &amp; network impact</div>
+        <div class="ph-text" style="color:var(--text2);font-style:normal;">The fuel constraint raises average prices by ~20% over Model R (42.90 vs 35.66 EUR/MWh). SE4 prices nearly converge with SE1–SE3 under the fuel-cycle model, hinting that nuclear constraints subtly reduce north–south congestion pressure.</div>
       </div>
-      <div class="placeholder-card">
-        <div class="ph-label">Finding 4</div>
-        <div class="ph-text">Add your key findings here as research progresses</div>
+      <div class="placeholder-card" style="border-style:dashed;">
+        <div class="ph-label">Scenario analysis</div>
+        <div class="ph-text">Comparative results across 2030, 2040, and 2050 VRE penetration scenarios are ongoing. Full findings will be available upon thesis completion.</div>
       </div>
     </div>
+
+    <!-- Results figure -->
+    <figure style="margin:0;">
+      <img src="results-chart.png" alt="Model R vs Model F comparative analysis — nuclear generation, average prices, fuel scarcity premium, and three-way comparison table" style="width:100%;border-radius:2px;border:1px solid var(--border2);display:block;" />
+      <figcaption style="font-size:0.78rem;color:var(--text3);margin-top:0.75rem;line-height:1.6;">
+        <strong style="color:var(--text2);">Figure 1.</strong> Full three-way comparative analysis (Model R · Model F Old · Model F New) across nuclear generation output, average zonal prices, total generation mix, fuel scarcity premium, and key calibration metrics. Model F New is calibrated to the 2018 observed nuclear output of 63 TWh. <em>Results are preliminary.</em>
+      </figcaption>
+    </figure>
   </div>
 
   <div class="divider"></div>
@@ -223,21 +241,6 @@
   <div class="divider"></div>
 
   <!-- REFERENCES -->
-  <div class="content-block reveal">
-    <p class="block-label">References</p>
-    <h2 class="block-title">Key sources</h2>
-    <div class="body-text">
-      <ol style="color:var(--text2);font-size:0.9rem;line-height:1.9;padding-left:1.2rem;">
-        <li>Blanchard, A. & Massol, O. (2025). "The value of nuclear power plants' flexibility: A multistage stochastic dynamic programming approach." <em>European Journal of Operational Research.</em> DOI: 10.1016/j.ejor.2025.04.007</li>
-        <li>Chen, Y. et al. (2020). <em>Analysis of Environmental Policy in the Power Sector: Equilibrium Methods and Bi-Level Modeling.</em> Springer. DOI: 10.1007/978-3-030-44866-0</li>
-        <li>Crampes, C. & Moreaux, M. (2001). "Water resource and power generation." <em>International Journal of Industrial Organization,</em> 19(6), 975–997. DOI: 10.1016/S0167-7187(99)00052-1</li>
-        <li>Jenkins, J. D. et al. (2018). "The benefits of nuclear flexibility in power system operations with renewable energy." <em>Applied Energy,</em> 222, 872–884. DOI: 10.1016/j.apenergy.2018.03.002</li>
-        <li>IAEA (2018). <em>Non-baseload Operation in Nuclear Power Plants: Load Following and Frequency Control Modes of Flexible Operation.</em> IAEA Nuclear Energy Series NP-T-3.23. Vienna: IAEA.</li>
-      </ol>
-    </div>
-  </div>
-
-</div><!-- REFERENCES -->
   <div class="content-block reveal">
     <p class="block-label">References</p>
     <h2 class="block-title">Key sources</h2>
