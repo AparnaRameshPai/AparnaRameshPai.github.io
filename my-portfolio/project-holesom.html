@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOLESOM — Aparna Ramesh Pai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0f;--bg2:#0f0f18;--bg3:#141420;--card:#12121c;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--pink:#e8619a;--pink2:#f2a0c0;--pink-dim:rgba(232,97,154,0.15);--text:#e8e6f0;--text2:#8a8898;--text3:#504e60}
+    html{scroll-behavior:smooth}
+    body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--pink);border-radius:2px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;letter-spacing:0.04em;color:var(--text);text-decoration:none}
+    .nav-logo span{color:var(--pink)}
+    .nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:0.5rem}
+    .nav-back:hover{color:var(--pink)}
+    .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--pink);color:#0a0a0f;text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;transition:background 0.2s,transform 0.15s}
+    .btn-primary:hover{background:var(--pink2);transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text2);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;border:1px solid var(--border2);transition:border-color 0.2s,color 0.2s}
+    .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+    .project-hero{padding:8rem 4rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+    .hero-glow{position:absolute;top:0;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,97,154,0.1) 0%,transparent 70%);pointer-events:none}
+    /* extra star-like dots for astrophysics feel */
+    .stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .star{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,0.4)}
+    .project-cat{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards}
+    .project-cat::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .project-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--text);max-width:22ch;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.25s forwards}
+    .project-meta{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
+    .meta-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.25rem}
+    .meta-value{font-size:0.88rem;color:var(--text)}
+    .project-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.55s forwards}
+    .project-content{max-width:860px;margin:0 auto;padding:5rem 4rem}
+    .content-block{margin-bottom:4rem}
+    .block-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+    .block-label::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .block-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--text);margin-bottom:1rem;letter-spacing:-0.01em}
+    .body-text{font-size:0.95rem;color:var(--text2);line-height:1.9;font-weight:300}
+    .body-text p+p{margin-top:1rem}
+    .stack-grid{display:flex;flex-wrap:wrap;gap:0.6rem}
+    .stack-chip{font-size:0.8rem;color:var(--text);background:var(--card);border:1px solid var(--border2);padding:0.4rem 1rem;border-radius:2px;transition:border-color 0.2s,color 0.2s}
+    .stack-chip:hover{border-color:var(--pink);color:var(--pink2)}
+    .findings-list{display:flex;flex-direction:column;gap:1rem}
+    .finding-item{display:flex;gap:1rem;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:2px;transition:border-color 0.25s}
+    .finding-item:hover{border-color:var(--pink-dim)}
+    .finding-num{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--pink);font-weight:300;flex-shrink:0;width:2rem;text-align:center;padding-top:0.1rem}
+    .finding-text{font-size:0.88rem;color:var(--text2);line-height:1.7}
+    .finding-text strong{color:var(--pink2);font-weight:500}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .gallery-item{background:var(--bg3);border:1px solid var(--border);border-radius:2px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .gallery-item img{width:100%;height:100%;object-fit:cover}
+    .gallery-placeholder{color:var(--text3);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:1rem}
+    .ref-list{display:flex;flex-direction:column;gap:0.75rem}
+    .ref-item{font-size:0.85rem;color:var(--text2);line-height:1.7;padding-left:1.25rem;position:relative}
+    .ref-item::before{content:'';position:absolute;left:0;top:0.6em;width:4px;height:4px;border-radius:50%;background:var(--pink)}
+    .ref-item a{color:var(--pink2);text-decoration:none}
+    .ref-item a:hover{color:var(--pink)}
+    .divider{height:1px;background:var(--border);margin:4rem 0}
+    .next-project{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .next-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.4rem}
+    .next-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--text)}
+    footer{padding:1.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    footer p{font-size:0.72rem;color:var(--text3);letter-spacing:0.06em}
+    .footer-dot{color:var(--pink)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:768px){nav{padding:1rem 1.5rem}.project-hero{padding:6rem 1.5rem 3rem}.project-content{padding:3rem 1.5rem}.gallery{grid-template-columns:1fr}.next-project{padding:2rem 1.5rem}footer{flex-direction:column;gap:0.5rem;text-align:center}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Aparna<span>.</span></a>
+  <a href="index.html#projects" class="nav-back">← Back to projects</a>
+</nav>
+
+<div class="project-hero">
+  <div class="hero-glow"></div>
+  <div class="stars" id="stars"></div>
+  <p class="project-cat">Astrophysics · Unsupervised ML</p>
+  <h1>HOLESOM: Hunting for Hidden Black Holes with Self-Organizing Maps</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <div class="meta-label">Type</div>
+      <div class="meta-value">Research Project</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Method</div>
+      <div class="meta-value">Self-Organizing Maps (SOM)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Domain</div>
+      <div class="meta-value">Astrophysics · Anomaly Detection</div>
+    </div>
+  </div>
+  <div class="project-actions">
+    <a href="https://github.com/AparnaRameshPai" target="_blank" class="btn-primary">GitHub ↗</a>
+    <a href="#" class="btn-ghost">View Paper / Report ↗</a>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <div class="content-block reveal">
+    <p class="block-label">Overview</p>
+    <h2 class="block-title">What this research does</h2>
+    <div class="body-text">
+      <p><!-- What is the scientific question? What are "hidden" black holes and why are they hard to detect? --></p>
+      <p><!-- What is a Self-Organizing Map and why is it suitable for this problem? --></p>
+      <p><!-- What dataset did you use? (e.g. X-ray survey data, spectral data, catalogs) --></p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block reveal">
+    <p class="block-label">Methodology</p>
+    <h2 class="block-title">How the model works</h2>
+    <div class="body-text">
+      <p><!-- Explain the SOM approach in plain language — how does it cluster the data, what does it look for? --></p>
+      <p><!-- What features were fed into the model? How was the output interpreted? --></p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block reveal">
+    <p class="block-label">Visualisations</p>
+    <h2 class="block-title">SOM output & results</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <!-- Replace with: <img src="som-map.png" alt="SOM cluster map" /> -->
+        <div class="gallery-placeholder">Add SOM cluster map</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">Add another result plot</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block reveal">
+    <p class="block-label">Key findings</p>
+    <h2 class="block-title">What was discovered</h2>
+    <div class="findings-list">
+      <div class="finding-item">
+        <div class="finding-num">1</div>
+        <div class="finding-text"><!-- e.g. The SOM identified <strong>X candidate objects</strong> that matched profiles of obscured black holes. --></div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">2</div>
+        <div class="finding-text"><!-- Another finding --></div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">3</div>
+        <div class="finding-text"><!-- Another finding --></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block reveal">
+    <p class="block-label">Tech stack</p>
+    <h2 class="block-title">Tools & methods</h2>
+    <div class="stack-grid">
+      <span class="stack-chip">Python</span>
+      <span class="stack-chip">Self-Organizing Maps</span>
+      <span class="stack-chip">NumPy</span>
+      <span class="stack-chip">Pandas</span>
+      <span class="stack-chip">Matplotlib</span>
+      <span class="stack-chip">Astropy</span>
+      <span class="stack-chip"><!-- Add more --></span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block reveal">
+    <p class="block-label">References</p>
+    <h2 class="block-title">Key sources</h2>
+    <div class="ref-list">
+      <p class="ref-item"><!-- e.g. Kohonen, T. (1990). The self-organizing map. <a href="#">Proceedings of the IEEE</a>. --></p>
+      <p class="ref-item"><!-- Any astrophysics papers you referenced --></p>
+      <p class="ref-item"><!-- Dataset source --></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="next-project">
+  <div>
+    <div class="next-label">Back to start</div>
+    <div class="next-title">View all projects →</div>
+  </div>
+  <a href="index.html#projects" class="btn-ghost">All projects →</a>
+</div>
+
+<footer>
+  <p>© 2025 Aparna Ramesh Pai <span class="footer-dot">·</span> All rights reserved</p>
+  <p><a href="index.html" style="color:var(--text3);text-decoration:none">Back to portfolio</a></p>
+</footer>
+
+<script>
+  // scatter random star dots in the hero for astrophysics feel
+  const starsEl = document.getElementById('stars');
+  for(let i = 0; i < 60; i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*0.6+0.1};width:${Math.random()<0.2?3:2}px;height:${Math.random()<0.2?3:2}px`;
+    starsEl.appendChild(s);
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

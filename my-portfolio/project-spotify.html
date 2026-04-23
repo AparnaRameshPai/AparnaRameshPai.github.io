@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify EDA — Aparna Ramesh Pai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0f;--bg2:#0f0f18;--bg3:#141420;--card:#12121c;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--pink:#e8619a;--pink2:#f2a0c0;--pink-dim:rgba(232,97,154,0.15);--text:#e8e6f0;--text2:#8a8898;--text3:#504e60}
+    html{scroll-behavior:smooth}
+    body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--pink);border-radius:2px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;letter-spacing:0.04em;color:var(--text);text-decoration:none}
+    .nav-logo span{color:var(--pink)}
+    .nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:0.5rem}
+    .nav-back:hover{color:var(--pink)}
+    .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--pink);color:#0a0a0f;text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;transition:background 0.2s,transform 0.15s}
+    .btn-primary:hover{background:var(--pink2);transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text2);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;border:1px solid var(--border2);transition:border-color 0.2s,color 0.2s}
+    .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+
+    /* HERO */
+    .project-hero{padding:8rem 4rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+    .hero-glow{position:absolute;top:0;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,97,154,0.1) 0%,transparent 70%);pointer-events:none}
+    .project-cat{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards}
+    .project-cat::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .project-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--text);max-width:22ch;margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.8s ease 0.25s forwards}
+    .project-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text2);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.35s forwards}
+    .project-meta{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
+    .meta-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.25rem}
+    .meta-value{font-size:0.88rem;color:var(--text)}
+    .project-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.55s forwards}
+
+    /* STATS BAR */
+    .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+    .stat-card{background:var(--card);padding:1.75rem;text-align:center}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--pink);line-height:1;margin-bottom:0.4rem}
+    .stat-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3)}
+
+    /* CONTENT */
+    .project-content{max-width:860px;margin:0 auto;padding:5rem 4rem}
+    .content-block{margin-bottom:4rem}
+    .block-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+    .block-label::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .block-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--text);margin-bottom:1rem;letter-spacing:-0.01em}
+    .body-text{font-size:0.95rem;color:var(--text2);line-height:1.9;font-weight:300}
+    .body-text p+p{margin-top:1rem}
+
+    /* QUESTIONS GRID */
+    .questions-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .question-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color 0.25s}
+    .question-card:hover{border-color:var(--pink-dim)}
+    .q-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--pink);font-weight:300;flex-shrink:0;line-height:1;padding-top:0.1rem}
+    .q-text{font-size:0.85rem;color:var(--text2);line-height:1.6}
+
+    /* FINDINGS */
+    .finding-block{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.75rem;margin-bottom:1.25rem;transition:border-color 0.25s;position:relative;overflow:hidden}
+    .finding-block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--pink)}
+    .finding-block:hover{border-color:var(--border2)}
+    .finding-heading{font-size:0.82rem;font-weight:600;color:var(--pink2);margin-bottom:0.75rem;letter-spacing:0.02em}
+    .finding-body{font-size:0.88rem;color:var(--text2);line-height:1.75}
+    .finding-body strong{color:var(--text);font-weight:500}
+    .finding-body em{color:var(--pink2);font-style:normal}
+
+    /* INSIGHT QUOTE */
+    .insight-quote{background:var(--bg3);border:1px solid var(--border2);border-radius:2px;padding:2.5rem;margin:1.5rem 0;position:relative}
+    .insight-quote::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:5rem;color:var(--pink);opacity:0.3;position:absolute;top:-0.5rem;left:1.5rem;line-height:1}
+    .insight-quote p{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;font-weight:300;color:var(--text);line-height:1.6;padding-left:1rem}
+
+    /* ML TABLE */
+    .ml-table{width:100%;border-collapse:collapse}
+    .ml-table th{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);padding:0.75rem 0;border-bottom:1px solid var(--border);text-align:left;font-weight:500}
+    .ml-table td{padding:0.9rem 0;font-size:0.88rem;border-bottom:1px solid var(--border);color:var(--text2)}
+    .ml-table td:first-child{color:var(--text)}
+    .ml-table td.highlight{color:var(--pink2);font-weight:500}
+
+    /* STACK */
+    .stack-grid{display:flex;flex-wrap:wrap;gap:0.6rem}
+    .stack-chip{font-size:0.8rem;color:var(--text);background:var(--card);border:1px solid var(--border2);padding:0.4rem 1rem;border-radius:2px;transition:border-color 0.2s,color 0.2s}
+    .stack-chip:hover{border-color:var(--pink);color:var(--pink2)}
+
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .gallery-item{background:var(--bg3);border:1px solid var(--border);border-radius:2px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .gallery-item img{width:100%;height:100%;object-fit:cover}
+    .gallery-placeholder{color:var(--text3);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:1rem;line-height:1.6}
+
+    .divider{height:1px;background:var(--border);margin:4rem 0}
+    .next-project{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .next-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.4rem}
+    .next-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--text)}
+    footer{padding:1.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    footer p{font-size:0.72rem;color:var(--text3);letter-spacing:0.06em}
+    .footer-dot{color:var(--pink)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:900px){
+      nav{padding:1rem 1.5rem}
+      .project-hero{padding:6rem 1.5rem 3rem}
+      .project-content{padding:3rem 1.5rem}
+      .stats-bar{grid-template-columns:1fr 1fr}
+      .questions-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .next-project{padding:2rem 1.5rem}
+      footer{flex-direction:column;gap:0.5rem;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="Portfolio-Website.html" class="nav-logo">Aparna<span>.</span></a>
+  <a href="Portfolio-Website#projects" class="nav-back">← Back to projects</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-glow"></div>
+  <p class="project-cat">Exploratory Data Analysis · Python</p>
+  <h1>What Makes a Song Popular?</h1>
+  <p class="project-subtitle">A Data-Driven Exploration of Spotify Audio Features</p>
+  <div class="project-meta">
+    <div class="meta-item">
+      <div class="meta-label">Dataset</div>
+      <div class="meta-value">114,000 Spotify tracks</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Type</div>
+      <div class="meta-value">EDA · Hypothesis Testing · ML</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Status</div>
+      <div class="meta-value">Complete</div>
+    </div>
+  </div>
+  <div class="project-actions">
+    <a href="https://github.com/AparnaRameshPai/spotify-popularity-eda" target="_blank" class="btn-primary">GitHub ↗</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-num">114K</div>
+    <div class="stat-label">Tracks analysed</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">0.10</div>
+    <div class="stat-label">Max feature correlation</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">0.84</div>
+    <div class="stat-label">Random Forest R²</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Hypotheses tested</div>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <!-- OVERVIEW -->
+  <div class="content-block reveal">
+    <p class="block-label">Overview</p>
+    <h2 class="block-title">Can you predict a hit by its sound?</h2>
+    <div class="body-text">
+      <p>Can you predict how popular a song will be just by analysing its sound? This project explores that question using Spotify's dataset of 114,000 tracks across multiple genres.</p>
+      <p>Rather than following a predefined direction, this is an open-ended data investigation — exploring patterns, challenging assumptions, and letting the data tell its own story. The analysis combines exploratory data analysis, statistical hypothesis testing, and machine learning to uncover what truly drives a song's popularity.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- QUESTIONS -->
+  <div class="content-block reveal">
+    <p class="block-label">Research questions</p>
+    <h2 class="block-title">What I set out to find</h2>
+    <div class="questions-grid">
+      <div class="question-card">
+        <div class="q-num">1</div>
+        <div class="q-text">Which audio features correlate most with popularity?</div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">2</div>
+        <div class="q-text">Are happy songs more popular than sad ones?</div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">3</div>
+        <div class="q-text">What separates a hit from a flop?</div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">4</div>
+        <div class="q-text">Can audio features alone predict popularity?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FINDINGS -->
+  <div class="content-block reveal">
+    <p class="block-label">Key findings</p>
+    <h2 class="block-title">What the data showed</h2>
+
+    <div class="finding-block">
+      <div class="finding-heading">1 — Audio features barely predict popularity</div>
+      <div class="finding-body">No single audio feature correlates above <strong>0.10</strong> with popularity — essentially zero on a scale of -1 to +1. The strongest predictor is instrumentalness (-0.10), suggesting vocal-led songs perform marginally better. Sound alone is almost no indicator of success.</div>
+    </div>
+
+    <div class="finding-block">
+      <div class="finding-heading">2 — Sad songs outperform happy songs</div>
+      <div class="finding-body">Contrary to intuition, sad songs (valence ≤ 0.5) average a popularity score of <strong>34.21</strong> vs happy songs at <strong>32.08</strong>. A t-test confirms this is statistically significant (p = 0.0000) — however the practical difference is only 2.14 points on a 100-point scale. This finding highlights an important distinction: <em>statistical significance ≠ practical significance.</em></div>
+    </div>
+
+    <div class="finding-block">
+      <div class="finding-heading">3 — Hits are louder and more vocal-led</div>
+      <div class="finding-body">Comparing the top 10% (hits, 63+ popularity) vs bottom 10% (flops, 0 popularity): hit songs are on average <strong>1 dB louder</strong> than flops, have significantly lower instrumentalness (0.057 vs 0.103), and are less acoustic (0.255 vs 0.341). The biggest separator is loudness — but even this difference is small.</div>
+    </div>
+
+    <div class="finding-block">
+      <div class="finding-heading">4 — Even machine learning struggles</div>
+      <div class="finding-body">
+        <table class="ml-table" style="margin-top:0.75rem">
+          <tr>
+            <th>Model</th><th>R² Score</th><th>RMSE</th>
+          </tr>
+          <tr>
+            <td>Linear Regression</td>
+            <td>0.020</td>
+            <td>22.05</td>
+          </tr>
+          <tr>
+            <td>Random Forest</td>
+            <td class="highlight">0.550</td>
+            <td class="highlight">14.94</td>
+          </tr>
+        </table>
+        <p style="margin-top:0.75rem">Even a Random Forest combining all audio features explains only <strong>55% of popularity variance</strong> — with predictions still off by ~15 points on average. Nearly half of what drives popularity remains unexplained by sound alone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CENTRAL INSIGHT -->
+  <div class="content-block reveal">
+    <p class="block-label">Central insight</p>
+    <h2 class="block-title">The real conclusion</h2>
+    <div class="insight-quote">
+      <p>What makes a song popular cannot be heard — it can only be felt through the cultural moment it lands in.</p>
+    </div>
+    <div class="body-text" style="margin-top:1.25rem">
+      <p>Artist fame, playlist placement, social media virality, and timing explain far more than danceability, energy, or tempo ever could. You can engineer the perfect sounding song — but you cannot engineer a hit.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- VISUALISATIONS -->
+  <div class="content-block reveal">
+    <p class="block-label">Visualisations</p>
+    <h2 class="block-title">Charts & plots</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <!-- Replace with: <img src="correlation-heatmap.png" alt="Correlation heatmap" /> -->
+        <div class="gallery-placeholder">Add correlation heatmap<br>from your notebook</div>
+      </div>
+      <div class="gallery-item">
+        <!-- Replace with: <img src="hits-vs-flops.png" alt="Hits vs flops comparison" /> -->
+        <div class="gallery-placeholder">Add hits vs flops<br>comparison chart</div>
+      </div>
+      <div class="gallery-item">
+        <!-- Replace with: <img src="valence-popularity.png" alt="Valence vs popularity" /> -->
+        <div class="gallery-placeholder">Add valence vs<br>popularity plot</div>
+      </div>
+      <div class="gallery-item">
+        <!-- Replace with: <img src="rf-predictions.png" alt="Random forest predictions" /> -->
+        <div class="gallery-placeholder">Add Random Forest<br>predictions plot</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text3);margin-top:0.75rem;">To add screenshots: export charts from your notebook as .png files, upload them to your GitHub repo, and replace the placeholder comments above with &lt;img&gt; tags.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STACK -->
+  <div class="content-block reveal">
+    <p class="block-label">Tech stack</p>
+    <h2 class="block-title">Tools used</h2>
+    <div class="stack-grid">
+      <span class="stack-chip">Python 3.11</span>
+      <span class="stack-chip">Pandas</span>
+      <span class="stack-chip">NumPy</span>
+      <span class="stack-chip">Matplotlib</span>
+      <span class="stack-chip">Seaborn</span>
+      <span class="stack-chip">Plotly</span>
+      <span class="stack-chip">SciPy</span>
+      <span class="stack-chip">Scikit-learn</span>
+      <span class="stack-chip">Jupyter Notebook</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="next-project">
+  <div>
+    <div class="next-label">Next project</div>
+    <div class="next-title">FinChurn — MLOps System →</div>
+  </div>
+  <a href="project-finchurn.html" class="btn-ghost">View project →</a>
+</div>
+
+<footer>
+  <p>© 2025 Aparna Ramesh Pai <span class="footer-dot">·</span> All rights reserved</p>
+  <p><a href="Portfolio-Website.html" style="color:var(--text3);text-decoration:none">Back to portfolio</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

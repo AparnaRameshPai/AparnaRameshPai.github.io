@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thesis — Aparna Ramesh Pai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0f;--bg2:#0f0f18;--bg3:#141420;--card:#12121c;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--pink:#e8619a;--pink2:#f2a0c0;--pink-dim:rgba(232,97,154,0.15);--text:#e8e6f0;--text2:#8a8898;--text3:#504e60}
+    html{scroll-behavior:smooth}
+    body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--pink);border-radius:2px}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 4rem;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;letter-spacing:0.04em;color:var(--text);text-decoration:none}
+    .nav-logo span{color:var(--pink)}
+    .nav-back{font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:0.5rem}
+    .nav-back:hover{color:var(--pink)}
+
+    .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--pink);color:#0a0a0f;text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;transition:background 0.2s,transform 0.15s}
+    .btn-primary:hover{background:var(--pink2);transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text2);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;border:1px solid var(--border2);transition:border-color 0.2s,color 0.2s}
+    .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+
+    /* HERO */
+    .project-hero{padding:8rem 4rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+    .hero-glow{position:absolute;top:0;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,97,154,0.1) 0%,transparent 70%);pointer-events:none}
+    .project-cat{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards}
+    .project-cat::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .project-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--text);max-width:26ch;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.25s forwards}
+    .project-meta{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
+    .meta-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.25rem}
+    .meta-value{font-size:0.88rem;color:var(--text)}
+    .project-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.55s forwards}
+
+    /* STATUS BADGE */
+    .status-badge{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--pink-dim);color:var(--pink);padding:0.3rem 0.75rem;border-radius:2px;font-weight:500}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+    /* PDF BANNER */
+    .pdf-banner{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+    .pdf-banner-left{display:flex;align-items:center;gap:1rem}
+    .pdf-icon{width:40px;height:40px;background:var(--pink-dim);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .pdf-title{font-size:0.88rem;color:var(--text);font-weight:500}
+    .pdf-subtitle{font-size:0.75rem;color:var(--text3);margin-top:0.1rem}
+
+    /* CONTENT */
+    .project-content{max-width:860px;margin:0 auto;padding:5rem 4rem}
+    .content-block{margin-bottom:4rem}
+    .block-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
+    .block-label::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
+    .block-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--text);margin-bottom:1rem;letter-spacing:-0.01em}
+    .body-text{font-size:0.95rem;color:var(--text2);line-height:1.9;font-weight:300}
+    .body-text p+p{margin-top:1rem}
+
+    /* RESEARCH QUESTION */
+    .rq-box{background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--pink);border-radius:2px;padding:1.75rem 2rem;margin:1.5rem 0}
+    .rq-label{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--pink);margin-bottom:0.75rem;font-weight:500}
+    .rq-text{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;font-weight:300;color:var(--text);line-height:1.6}
+
+    /* STACK */
+    .stack-grid{display:flex;flex-wrap:wrap;gap:0.6rem}
+    .stack-chip{font-size:0.8rem;color:var(--text);background:var(--card);border:1px solid var(--border2);padding:0.4rem 1rem;border-radius:2px;transition:border-color 0.2s,color 0.2s}
+    .stack-chip:hover{border-color:var(--pink);color:var(--pink2)}
+
+    /* FINDINGS / PLACEHOLDER CARDS */
+    .placeholder-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .placeholder-card{background:var(--card);border:1px dashed var(--border2);border-radius:2px;padding:1.75rem;display:flex;flex-direction:column;gap:0.5rem}
+    .placeholder-card .ph-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3)}
+    .placeholder-card .ph-text{font-size:0.82rem;color:var(--text3);font-style:italic}
+
+    .divider{height:1px;background:var(--border);margin:4rem 0}
+    .next-project{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+    .next-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.4rem}
+    .next-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--text)}
+    footer{padding:1.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    footer p{font-size:0.72rem;color:var(--text3);letter-spacing:0.06em}
+    .footer-dot{color:var(--pink)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem}
+      .project-hero{padding:6rem 1.5rem 3rem}
+      .pdf-banner{padding:1.25rem 1.5rem}
+      .project-content{padding:3rem 1.5rem}
+      .placeholder-grid{grid-template-columns:1fr}
+      .next-project{padding:2rem 1.5rem}
+      footer{flex-direction:column;gap:0.5rem;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="Portfolio-Website.html" class="nav-logo">Aparna<span>.</span></a>
+  <a href="Portfolio-Website.html#projects" class="nav-back">← Back to projects</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-glow"></div>
+  <p class="project-cat">Master's Thesis · Stockholm University · 2025–2026</p>
+  <h1>Flexibility of Nuclear Plants in the Nordic Electricity Market</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <div class="meta-label">Institution</div>
+      <div class="meta-value">Stockholm University, Sweden</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Programme</div>
+      <div class="meta-value">MSc Data Science, Statistics & Decision Analysis</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Expected completion</div>
+      <div class="meta-value">June 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Status</div>
+      <div class="meta-value"><span class="status-badge"><span class="status-dot"></span>In progress</span></div>
+    </div>
+  </div>
+  <div class="project-actions">
+    <!--
+      TO ADD YOUR PDF:
+      1. Upload Draft_Thesis.pdf to your GitHub repo
+      2. The button below will open it in a new tab automatically
+    -->
+    <a href="Draft_Thesis.pdf" target="_blank" class="btn-primary">📄 View Draft PDF ↗</a>
+    <a href="Portfolio-Website.html#contact" class="btn-ghost">Get in touch</a>
+  </div>
+</div>
+
+<!-- PDF BANNER -->
+<div class="pdf-banner">
+  <div class="pdf-banner-left">
+    <div class="pdf-icon">📄</div>
+    <div>
+      <div class="pdf-title">Draft_Thesis.pdf</div>
+      <div class="pdf-subtitle">Current working draft — updated as research progresses</div>
+    </div>
+  </div>
+  <a href="Draft_Thesis.pdf" target="_blank" class="btn-ghost">Open PDF ↗</a>
+</div>
+
+<div class="project-content">
+
+  <!-- OVERVIEW -->
+  <div class="content-block reveal">
+    <p class="block-label">Overview</p>
+    <h2 class="block-title">What this research is about</h2>
+    <div class="body-text">
+      <p>An equilibrium model of the Nordic power sector is adapted to model nuclear plants' flexibility as a resource stock to be deployed over the year. The study investigates how treating nuclear fuel cycles as a dispatchable resource — rather than a fixed baseload — changes our understanding of nuclear power's role in a grid with high renewable energy penetration.</p>
+      <p>The Nordic electricity market is a compelling context for this question: it combines hydro-dominated generation, significant wind expansion, and a mix of nuclear capacities across Sweden and Finland, creating unique dynamics around flexibility and pricing.</p>
+    </div>
+
+    <div class="rq-box">
+      <div class="rq-label">Primary research question</div>
+      <div class="rq-text">"How can modelling of nuclear fuel cycles as a resource stock deployed over the year impact the assessment of nuclear-power-plant flexibility and the overall equilibrium of the Nordic electricity market under high VRE penetration?"</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- METHODOLOGY -->
+  <div class="content-block reveal">
+    <p class="block-label">Methodology</p>
+    <h2 class="block-title">Approach & methods</h2>
+    <div class="body-text">
+      <p><!-- Add details about your modelling approach, data sources, and methodology as your thesis develops --></p>
+      <p><!-- e.g. What equilibrium model are you using? What scenarios are you testing? What data are you working with? --></p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRELIMINARY FINDINGS — placeholder cards -->
+  <div class="content-block reveal">
+    <p class="block-label">Findings</p>
+    <h2 class="block-title">Results & insights</h2>
+    <div class="placeholder-grid">
+      <div class="placeholder-card">
+        <div class="ph-label">Finding 1</div>
+        <div class="ph-text">Add your key findings here as research progresses</div>
+      </div>
+      <div class="placeholder-card">
+        <div class="ph-label">Finding 2</div>
+        <div class="ph-text">Add your key findings here as research progresses</div>
+      </div>
+      <div class="placeholder-card">
+        <div class="ph-label">Finding 3</div>
+        <div class="ph-text">Add your key findings here as research progresses</div>
+      </div>
+      <div class="placeholder-card">
+        <div class="ph-label">Finding 4</div>
+        <div class="ph-text">Add your key findings here as research progresses</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TECH STACK -->
+  <div class="content-block reveal">
+    <p class="block-label">Tools & methods</p>
+    <h2 class="block-title">Tech stack</h2>
+    <div class="stack-grid">
+      <span class="stack-chip">GAMS Studio</span>
+      <span class="stack-chip">Python</span>
+      <span class="stack-chip">Excel</span>
+      <span class="stack-chip">Data Analysis</span>
+      <span class="stack-chip">Data Visualisation</span>
+      <span class="stack-chip">Equilibrium Modelling</span>
+      <span class="stack-chip">Time Series Analysis</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- REFERENCES -->
+  <div class="content-block reveal">
+    <p class="block-label">References</p>
+    <h2 class="block-title">Key sources</h2>
+    <div class="body-text">
+      <p style="color:var(--text3);font-style:italic;font-size:0.88rem;">References will be added as the thesis develops. Full bibliography available in the PDF draft above.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="next-project">
+  <div>
+    <div class="next-label">Next project</div>
+    <div class="next-title">Black Hole Parameter Inference →</div>
+  </div>
+  <a href="project-holesom.html" class="btn-ghost">View project →</a>
+</div>
+
+<footer>
+  <p>© 2025 Aparna Ramesh Pai <span class="footer-dot">·</span> All rights reserved</p>
+  <p>Stockholm, Sweden <span class="footer-dot">·</span> <a href="Portfolio-Website.html" style="color:var(--text3);text-decoration:none">Back to portfolio</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
