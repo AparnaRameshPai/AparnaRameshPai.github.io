@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HOLESOM — Aparna Ramesh Pai</title>
+  <title>MBH-SOM-UQ — Aparna Ramesh Pai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -22,18 +22,30 @@
     .btn-primary:hover{background:var(--pink2);transform:translateY(-2px)}
     .btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--text2);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;border:1px solid var(--border2);transition:border-color 0.2s,color 0.2s}
     .btn-ghost:hover{border-color:var(--pink);color:var(--pink)}
+
+    /* HERO */
     .project-hero{padding:8rem 4rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
     .hero-glow{position:absolute;top:0;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,97,154,0.1) 0%,transparent 70%);pointer-events:none}
-    /* extra star-like dots for astrophysics feel */
     .stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
     .star{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,0.4)}
     .project-cat{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;opacity:0;animation:fadeUp 0.8s ease 0.1s forwards}
     .project-cat::before{content:'';display:block;width:20px;height:1px;background:var(--pink)}
-    .project-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--text);max-width:22ch;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.25s forwards}
+    .project-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--text);max-width:26ch;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.25s forwards}
     .project-meta{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
     .meta-label{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.25rem}
     .meta-value{font-size:0.88rem;color:var(--text)}
     .project-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.55s forwards}
+
+    /* STATUS / WIP BADGE */
+    .status-badge{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--pink-dim);color:var(--pink);padding:0.3rem 0.75rem;border-radius:2px;font-weight:500}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:pulse 2s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+    .wip-banner{background:rgba(232,97,154,0.06);border:1px solid rgba(232,97,154,0.2);border-radius:2px;padding:1rem 1.5rem;display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:2rem}
+    .wip-icon{font-size:1rem;flex-shrink:0;margin-top:0.1rem}
+    .wip-text{font-size:0.82rem;color:var(--text2);line-height:1.6}
+    .wip-text strong{color:var(--pink2)}
+
+    /* CONTENT */
     .project-content{max-width:860px;margin:0 auto;padding:5rem 4rem}
     .content-block{margin-bottom:4rem}
     .block-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);font-weight:500;display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem}
@@ -41,24 +53,40 @@
     .block-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--text);margin-bottom:1rem;letter-spacing:-0.01em}
     .body-text{font-size:0.95rem;color:var(--text2);line-height:1.9;font-weight:300}
     .body-text p+p{margin-top:1rem}
+
+    /* METHOD CARDS */
+    .method-list{display:flex;flex-direction:column;gap:1.25rem}
+    .method-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.5rem;position:relative;overflow:hidden;transition:border-color 0.25s}
+    .method-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--pink)}
+    .method-card:hover{border-color:var(--border2)}
+    .method-title{font-size:0.85rem;font-weight:600;color:var(--pink2);margin-bottom:0.5rem;letter-spacing:0.02em}
+    .method-body{font-size:0.85rem;color:var(--text2);line-height:1.75}
+    .method-body strong{color:var(--text);font-weight:500}
+
+    /* EVALUATION GRID */
+    .eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+    .eval-item{background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:1rem 1.25rem;font-size:0.82rem;color:var(--text2);display:flex;align-items:center;gap:0.6rem}
+    .eval-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--pink);flex-shrink:0}
+
+    /* STACK */
     .stack-grid{display:flex;flex-wrap:wrap;gap:0.6rem}
     .stack-chip{font-size:0.8rem;color:var(--text);background:var(--card);border:1px solid var(--border2);padding:0.4rem 1rem;border-radius:2px;transition:border-color 0.2s,color 0.2s}
     .stack-chip:hover{border-color:var(--pink);color:var(--pink2)}
-    .findings-list{display:flex;flex-direction:column;gap:1rem}
-    .finding-item{display:flex;gap:1rem;padding:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:2px;transition:border-color 0.25s}
-    .finding-item:hover{border-color:var(--pink-dim)}
-    .finding-num{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--pink);font-weight:300;flex-shrink:0;width:2rem;text-align:center;padding-top:0.1rem}
-    .finding-text{font-size:0.88rem;color:var(--text2);line-height:1.7}
-    .finding-text strong{color:var(--pink2);font-weight:500}
-    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .gallery-item{background:var(--bg3);border:1px solid var(--border);border-radius:2px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .gallery-item img{width:100%;height:100%;object-fit:cover}
-    .gallery-placeholder{color:var(--text3);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:1rem}
-    .ref-list{display:flex;flex-direction:column;gap:0.75rem}
-    .ref-item{font-size:0.85rem;color:var(--text2);line-height:1.7;padding-left:1.25rem;position:relative}
-    .ref-item::before{content:'';position:absolute;left:0;top:0.6em;width:4px;height:4px;border-radius:50%;background:var(--pink)}
-    .ref-item a{color:var(--pink2);text-decoration:none}
-    .ref-item a:hover{color:var(--pink)}
+
+    /* REPO STRUCTURE */
+    .repo-tree{background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:1.5rem 2rem;font-family:'Courier New',monospace;font-size:0.78rem;color:var(--text2);line-height:1.9;overflow-x:auto}
+    .repo-tree .folder{color:var(--pink2)}
+    .repo-tree .file{color:var(--text2)}
+    .repo-tree .comment{color:var(--text3)}
+
+    /* REFERENCE */
+    .ref-card{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:1.5rem;display:flex;flex-direction:column;gap:0.5rem}
+    .ref-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text);font-weight:400;line-height:1.4}
+    .ref-authors{font-size:0.78rem;color:var(--text3)}
+    .ref-journal{font-size:0.78rem;color:var(--pink2)}
+    .ref-link{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--pink);text-decoration:none;margin-top:0.25rem;transition:opacity 0.2s}
+    .ref-link:hover{opacity:0.75}
+
     .divider{height:1px;background:var(--border);margin:4rem 0}
     .next-project{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
     .next-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:0.4rem}
@@ -66,10 +94,19 @@
     footer{padding:1.5rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
     footer p{font-size:0.72rem;color:var(--text3);letter-spacing:0.06em}
     .footer-dot{color:var(--pink)}
+
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
     .reveal.visible{opacity:1;transform:translateY(0)}
-    @media(max-width:768px){nav{padding:1rem 1.5rem}.project-hero{padding:6rem 1.5rem 3rem}.project-content{padding:3rem 1.5rem}.gallery{grid-template-columns:1fr}.next-project{padding:2rem 1.5rem}footer{flex-direction:column;gap:0.5rem;text-align:center}}
+
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem}
+      .project-hero{padding:6rem 1.5rem 3rem}
+      .project-content{padding:3rem 1.5rem}
+      .eval-grid{grid-template-columns:1fr}
+      .next-project{padding:2rem 1.5rem}
+      footer{flex-direction:column;gap:0.5rem;text-align:center}
+    }
   </style>
 </head>
 <body>
@@ -79,116 +116,169 @@
   <a href="index.html#projects" class="nav-back">← Back to projects</a>
 </nav>
 
+<!-- HERO -->
 <div class="project-hero">
   <div class="hero-glow"></div>
   <div class="stars" id="stars"></div>
-  <p class="project-cat">Astrophysics · Unsupervised ML</p>
-  <h1>HOLESOM: Hunting for Hidden Black Holes with Self-Organizing Maps</h1>
+  <p class="project-cat">Independent Research · Astrophysics · Unsupervised ML</p>
+  <h1>Uncertainty-Aware Black Hole Parameter Inference via Self-Organizing Maps</h1>
   <div class="project-meta">
     <div class="meta-item">
       <div class="meta-label">Type</div>
-      <div class="meta-value">Research Project</div>
+      <div class="meta-value">Independent Research Project</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Method</div>
-      <div class="meta-value">Self-Organizing Maps (SOM)</div>
+      <div class="meta-value">SOM + Monte Carlo UQ + Bootstrap Ensemble</div>
     </div>
     <div class="meta-item">
-      <div class="meta-label">Domain</div>
-      <div class="meta-value">Astrophysics · Anomaly Detection</div>
+      <div class="meta-label">Validated on</div>
+      <div class="meta-value">Sagittarius A*</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Status</div>
+      <div class="meta-value"><span class="status-badge"><span class="status-dot"></span>In active development</span></div>
     </div>
   </div>
   <div class="project-actions">
-    <a href="https://github.com/AparnaRameshPai" target="_blank" class="btn-primary">GitHub ↗</a>
-    <a href="#" class="btn-ghost">View Paper / Report ↗</a>
+    <!-- GitHub link will be added once the project is ready to publish -->
+    <span class="btn-ghost" style="cursor:default;opacity:0.5;">GitHub — Coming Soon</span>
   </div>
 </div>
 
 <div class="project-content">
 
+  <!-- WIP NOTICE -->
+  <div class="wip-banner">
+    <div class="wip-icon">⚠️</div>
+    <div class="wip-text"><strong>This project is currently in active research and development.</strong> The methodology, planned structure, and motivation are documented below. Code and results will be published to GitHub once the project reaches a stable state.</div>
+  </div>
+
+  <!-- OVERVIEW -->
   <div class="content-block reveal">
     <p class="block-label">Overview</p>
     <h2 class="block-title">What this research does</h2>
     <div class="body-text">
-      <p><!-- What is the scientific question? What are "hidden" black holes and why are they hard to detect? --></p>
-      <p><!-- What is a Self-Organizing Map and why is it suitable for this problem? --></p>
-      <p><!-- What dataset did you use? (e.g. X-ray survey data, spectral data, catalogs) --></p>
+      <p>An independent research project inspired by the <a href="https://arxiv.org/abs/2410.11951" target="_blank" style="color:var(--pink2);text-decoration:none">HOLESOM paper</a> (La Torre & Pacucci, 2025). This project extends the original HOLESOM methodology by making uncertainty a first-class citizen of the inference pipeline.</p>
+      <p>Standard Self-Organizing Maps return a single point estimate — no confidence, no uncertainty. This project asks: <strong style="color:var(--text)">how confident should we actually be in those estimates?</strong></p>
+      <p>Given sparse multi-wavelength photometric measurements of a source (radio → X-ray), the pipeline infers two physical parameters of a slowly-accreting massive black hole: <strong style="color:var(--pink2)">M_BH</strong> (black hole mass in solar masses) and <strong style="color:var(--pink2)">f_Edd</strong> (Eddington ratio — how fast it is accreting relative to its theoretical maximum). And crucially, it attaches statistically rigorous uncertainty estimates to both.</p>
     </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- MOTIVATION -->
+  <div class="content-block reveal">
+    <p class="block-label">Motivation</p>
+    <h2 class="block-title">Why this problem matters</h2>
+    <div class="body-text">
+      <p>Slowly-accreting massive black holes are among the hardest objects to detect in the universe. They emit via <strong style="color:var(--text)">Advection Dominated Accretion Flow (ADAF)</strong> — a radiatively inefficient mode that makes them faint and easily confused with other astrophysical sources. HOLESOM introduced a SOM-based approach to identify and characterise them from sparse photometric data.</p>
+      <p>This project builds on that foundation with a statistical rigour question the original paper leaves open: <strong style="color:var(--text)">are the uncertainties well-calibrated?</strong> Do 90% confidence intervals actually contain the true value 90% of the time? Which uncertainty method is sharper — and when do they disagree, and why?</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- METHODS -->
   <div class="content-block reveal">
     <p class="block-label">Methodology</p>
-    <h2 class="block-title">How the model works</h2>
-    <div class="body-text">
-      <p><!-- Explain the SOM approach in plain language — how does it cluster the data, what does it look for? --></p>
-      <p><!-- What features were fed into the model? How was the output interpreted? --></p>
+    <h2 class="block-title">Planned methods</h2>
+    <div class="method-list">
+      <div class="method-card">
+        <div class="method-title">Baseline — Self-Organizing Map</div>
+        <div class="method-body">A SOM trained on ~20,000 synthetic ADAF spectral energy distributions (SEDs), each labelled with known M_BH and f_Edd. Given a new source, the <strong>Best Matching Unit (BMU)</strong> on the trained grid gives point estimates.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-title">Method 1 — Monte Carlo Input Perturbation</div>
+        <div class="method-body">Propagates photometric measurement errors through the SOM by sampling N perturbed versions of the input within its error bars. The spread of predictions captures <strong>measurement uncertainty</strong>.</div>
+      </div>
+      <div class="method-card">
+        <div class="method-title">Method 2 — Bootstrap SOM Ensemble</div>
+        <div class="method-body">Trains N SOMs on bootstrap resamples of the training data. The spread of predictions across the ensemble captures <strong>model uncertainty</strong> — how sensitive the SOM is to its training sample.</div>
+      </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- EVALUATION -->
   <div class="content-block reveal">
-    <p class="block-label">Visualisations</p>
-    <h2 class="block-title">SOM output & results</h2>
-    <div class="gallery">
-      <div class="gallery-item">
-        <!-- Replace with: <img src="som-map.png" alt="SOM cluster map" /> -->
-        <div class="gallery-placeholder">Add SOM cluster map</div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder">Add another result plot</div>
-      </div>
+    <p class="block-label">Evaluation</p>
+    <h2 class="block-title">How results will be assessed</h2>
+    <div class="body-text" style="margin-bottom:1.5rem">
+      <p>Both methods will be evaluated on held-out synthetic SEDs (ground truth known) and validated on Sagittarius A* using the following metrics:</p>
+    </div>
+    <div class="eval-grid">
+      <div class="eval-item">Reliability diagrams</div>
+      <div class="eval-item">Expected Calibration Error (ECE)</div>
+      <div class="eval-item">Continuous Ranked Probability Score (CRPS)</div>
+      <div class="eval-item">Interval sharpness comparison</div>
     </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- REPO STRUCTURE -->
   <div class="content-block reveal">
-    <p class="block-label">Key findings</p>
-    <h2 class="block-title">What was discovered</h2>
-    <div class="findings-list">
-      <div class="finding-item">
-        <div class="finding-num">1</div>
-        <div class="finding-text"><!-- e.g. The SOM identified <strong>X candidate objects</strong> that matched profiles of obscured black holes. --></div>
-      </div>
-      <div class="finding-item">
-        <div class="finding-num">2</div>
-        <div class="finding-text"><!-- Another finding --></div>
-      </div>
-      <div class="finding-item">
-        <div class="finding-num">3</div>
-        <div class="finding-text"><!-- Another finding --></div>
-      </div>
+    <p class="block-label">Repository structure</p>
+    <h2 class="block-title">Planned project layout</h2>
+    <div class="repo-tree">
+<span class="folder">mbh-som-uq/</span>
+├── <span class="folder">data/</span>
+│   ├── <span class="file">generate_seds.py</span>         <span class="comment"># synthetic ADAF SED generator</span>
+│   └── <span class="file">sgr_a_star.py</span>            <span class="comment"># Sgr A* validation source</span>
+├── <span class="folder">som/</span>
+│   ├── <span class="file">train.py</span>                 <span class="comment"># SOM training</span>
+│   └── <span class="file">predict.py</span>               <span class="comment"># BMU lookup, point estimates</span>
+├── <span class="folder">uq/</span>
+│   ├── <span class="file">mc_perturbation.py</span>       <span class="comment"># Method 1</span>
+│   └── <span class="file">bootstrap_ensemble.py</span>    <span class="comment"># Method 2</span>
+├── <span class="folder">evaluation/</span>
+│   ├── <span class="file">calibration.py</span>           <span class="comment"># reliability diagrams, ECE</span>
+│   └── <span class="file">scoring.py</span>               <span class="comment"># CRPS, interval width</span>
+├── <span class="folder">validation/</span>
+│   └── <span class="file">sgr_a_star.py</span>            <span class="comment"># real-world validation</span>
+├── <span class="folder">notebooks/</span>
+│   ├── <span class="file">01_data_exploration.ipynb</span>
+│   ├── <span class="file">02_baseline_som.ipynb</span>
+│   ├── <span class="file">03_uq_methods.ipynb</span>
+│   └── <span class="file">04_results_figures.ipynb</span>
+└── <span class="folder">results/figures/</span>
     </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- TECH STACK -->
   <div class="content-block reveal">
     <p class="block-label">Tech stack</p>
-    <h2 class="block-title">Tools & methods</h2>
+    <h2 class="block-title">Tools & libraries</h2>
     <div class="stack-grid">
-      <span class="stack-chip">Python</span>
-      <span class="stack-chip">Self-Organizing Maps</span>
+      <span class="stack-chip">Python 3.9+</span>
+      <span class="stack-chip">minisom</span>
       <span class="stack-chip">NumPy</span>
-      <span class="stack-chip">Pandas</span>
+      <span class="stack-chip">SciPy</span>
+      <span class="stack-chip">Scikit-learn</span>
+      <span class="stack-chip">properscoring</span>
       <span class="stack-chip">Matplotlib</span>
-      <span class="stack-chip">Astropy</span>
-      <span class="stack-chip"><!-- Add more --></span>
+      <span class="stack-chip">Seaborn</span>
     </div>
   </div>
 
   <div class="divider"></div>
 
+  <!-- REFERENCE -->
   <div class="content-block reveal">
-    <p class="block-label">References</p>
-    <h2 class="block-title">Key sources</h2>
-    <div class="ref-list">
-      <p class="ref-item"><!-- e.g. Kohonen, T. (1990). The self-organizing map. <a href="#">Proceedings of the IEEE</a>. --></p>
-      <p class="ref-item"><!-- Any astrophysics papers you referenced --></p>
-      <p class="ref-item"><!-- Dataset source --></p>
+    <p class="block-label">Inspiration & credit</p>
+    <h2 class="block-title">Original paper</h2>
+    <div class="ref-card">
+      <div class="ref-title">HOLESOM: Constraining the Properties of Slowly-Accreting Massive Black Holes with Self-Organizing Maps</div>
+      <div class="ref-authors">La Torre, V. & Pacucci, F. (2025)</div>
+      <div class="ref-journal">The Astrophysical Journal</div>
+      <a href="https://arxiv.org/abs/2410.11951" target="_blank" class="ref-link">arXiv:2410.11951 ↗</a>
+    </div>
+    <div class="body-text" style="margin-top:1.25rem">
+      <p>All credit for the original HOLESOM methodology goes to the authors. This project is an independent extension focused on uncertainty quantification and calibration.</p>
     </div>
   </div>
 
@@ -197,9 +287,9 @@
 <div class="next-project">
   <div>
     <div class="next-label">Next project</div>
-    <div class="next-title">View project →</div>
+    <div class="next-title">What Makes a Song Popular? →</div>
   </div>
-  <a href="project.spotify.html" class="btn-ghost">All projects →</a>
+  <a href="project-spotify.html" class="btn-ghost">View project →</a>
 </div>
 
 <footer>
@@ -208,7 +298,6 @@
 </footer>
 
 <script>
-  // scatter random star dots in the hero for astrophysics feel
   const starsEl = document.getElementById('stars');
   for(let i = 0; i < 60; i++){
     const s = document.createElement('div');
