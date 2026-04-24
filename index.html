@@ -228,12 +228,19 @@
     .acc-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:400; color:var(--text); margin-bottom:0.5rem; line-height:1.3; }
     .acc-card p { font-size:0.82rem; color:var(--text2); line-height:1.7; }
 
+    /* CONTACT STARS CANVAS */
+    #contact-stars {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      pointer-events:none; z-index:0;
+    }
+
     /* CONTACT */
     #contact { background:var(--bg2); padding:0; overflow:hidden; position:relative; }
 
     /* animated grid background */
     .contact-grid-bg {
-      position:absolute; inset:0; pointer-events:none;
+      position:absolute; inset:0; pointer-events:none; z-index:1;
       background-image:
         linear-gradient(rgba(232,97,154,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(232,97,154,0.04) 1px, transparent 1px);
@@ -247,7 +254,7 @@
 
     /* glow orbs */
     .contact-orb {
-      position:absolute; border-radius:50%; pointer-events:none;
+      position:absolute; border-radius:50%; pointer-events:none; z-index:1;
     }
     .contact-orb-1 {
       width:500px; height:500px;
@@ -261,7 +268,7 @@
     }
 
     .contact-wrap {
-      position:relative; z-index:1;
+      position:relative; z-index:2;
       display:grid; grid-template-columns:1fr 1fr;
       min-height:520px;
     }
@@ -271,6 +278,7 @@
       padding:6rem 4rem;
       display:flex; flex-direction:column; justify-content:center;
       border-right:1px solid var(--border);
+      background:transparent;
     }
     .contact-left .section-tag { margin-bottom:1.25rem; }
     .contact-left .section-title { margin-bottom:1.5rem; }
@@ -305,6 +313,7 @@
     .contact-right {
       padding:6rem 4rem;
       display:flex; flex-direction:column; justify-content:center; gap:1.5rem;
+      background:transparent;
     }
 
     /* availability card */
@@ -711,6 +720,7 @@
 
 <!-- CONTACT -->
 <section id="contact">
+  <canvas id="contact-stars"></canvas>
   <div class="contact-grid-bg"></div>
   <div class="contact-orb contact-orb-1"></div>
   <div class="contact-orb contact-orb-2"></div>
@@ -721,7 +731,7 @@
     <div class="contact-left reveal">
       <p class="section-tag">Contact</p>
       <h2 class="section-title">Let's<br><em>connect</em></h2>
-      <p class="contact-desc">Feel free to reach out!</p>
+      <p class="contact-desc">I'm actively looking for data and AI roles in Sweden. Whether it's a job, internship, collaboration, or just a conversation — my inbox is always open.</p>
       <div class="contact-email-wrap">
         <div class="contact-email-label">Email me at</div>
         <a href="mailto:aparnapai247@gmail.com" class="contact-email">aparnapai247@gmail.com</a>
@@ -774,6 +784,60 @@
 </footer>
 
 <script>
+  // Contact section star field
+  const canvas = document.getElementById('contact-stars');  const section = document.getElementById('contact');
+  if (canvas && section) {
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let animId;
+
+    function resize() {
+      canvas.width  = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+    }
+
+    function makeStars(n) {
+      stars = [];
+      for (let i = 0; i < n; i++) {
+        stars.push({
+          x:       Math.random() * canvas.width,
+          y:       Math.random() * canvas.height,
+          r:       Math.random() * 1.8 + 0.4,
+          alpha:   Math.random(),
+          delta:   (Math.random() * 0.006 + 0.002) * (Math.random() < 0.5 ? 1 : -1),
+          pink:    Math.random() < 0.2
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.delta;
+        if (s.alpha <= 0 || s.alpha >= 1) s.delta *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.pink
+          ? `rgba(242,160,192,${s.alpha * 0.95})`
+          : `rgba(232,230,240,${s.alpha * 0.9})`;
+        ctx.fill();
+      });
+      animId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    makeStars(350);
+    draw();
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animId);
+      resize();
+      makeStars(350);
+      draw();
+    });
+  }
+
+  // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
