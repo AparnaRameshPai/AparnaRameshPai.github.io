@@ -229,16 +229,134 @@
     .acc-card p { font-size:0.82rem; color:var(--text2); line-height:1.7; }
 
     /* CONTACT */
-    #contact { background:var(--bg2); text-align:center; }
-    .contact-inner { max-width:600px; margin:0 auto; }
-    .contact-inner .section-tag { justify-content:center; }
-    .contact-inner .section-tag::before { display:none; }
-    .contact-desc { font-size:1rem; color:var(--text2); line-height:1.8; margin-bottom:2.5rem; font-weight:300; }
-    .contact-email { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,2.5vw,2rem); font-weight:300; color:var(--text); text-decoration:none; border-bottom:1px solid var(--border2); padding-bottom:0.3rem; transition:color 0.2s,border-color 0.2s; display:inline-block; margin-bottom:3rem; }
+    #contact { background:var(--bg2); padding:0; overflow:hidden; position:relative; }
+
+    /* animated grid background */
+    .contact-grid-bg {
+      position:absolute; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(232,97,154,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,97,154,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .contact-grid-bg::after {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(10,10,15,0) 0%, var(--bg2) 70%);
+    }
+
+    /* glow orbs */
+    .contact-orb {
+      position:absolute; border-radius:50%; pointer-events:none;
+    }
+    .contact-orb-1 {
+      width:500px; height:500px;
+      top:-150px; left:-100px;
+      background:radial-gradient(circle, rgba(232,97,154,0.07) 0%, transparent 70%);
+    }
+    .contact-orb-2 {
+      width:400px; height:400px;
+      bottom:-100px; right:-80px;
+      background:radial-gradient(circle, rgba(232,97,154,0.06) 0%, transparent 70%);
+    }
+
+    .contact-wrap {
+      position:relative; z-index:1;
+      display:grid; grid-template-columns:1fr 1fr;
+      min-height:520px;
+    }
+
+    /* LEFT — text side */
+    .contact-left {
+      padding:6rem 4rem;
+      display:flex; flex-direction:column; justify-content:center;
+      border-right:1px solid var(--border);
+    }
+    .contact-left .section-tag { margin-bottom:1.25rem; }
+    .contact-left .section-title { margin-bottom:1.5rem; }
+    .contact-desc {
+      font-size:0.95rem; color:var(--text2); line-height:1.9;
+      font-weight:300; max-width:40ch; margin-bottom:2.5rem;
+    }
+    .contact-email-wrap { margin-bottom:3rem; }
+    .contact-email-label { font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text3); margin-bottom:0.5rem; }
+    .contact-email {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.1rem,2vw,1.6rem);
+      font-weight:300; color:var(--text); text-decoration:none;
+      border-bottom:1px solid var(--border2); padding-bottom:0.3rem;
+      transition:color 0.2s,border-color 0.2s; display:inline-block;
+    }
     .contact-email:hover { color:var(--pink); border-color:var(--pink); }
-    .social-links { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
-    .social-link { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--text3); text-decoration:none; transition:color 0.2s; font-weight:500; }
-    .social-link:hover { color:var(--pink); }
+
+    /* social links row */
+    .social-links { display:flex; gap:1rem; flex-wrap:wrap; }
+    .social-link {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--text2); text-decoration:none; font-weight:500;
+      background:var(--card); border:1px solid var(--border);
+      padding:0.6rem 1.1rem; border-radius:2px;
+      transition:border-color 0.2s,color 0.2s;
+    }
+    .social-link:hover { border-color:var(--pink); color:var(--pink); }
+
+    /* RIGHT — visual side */
+    .contact-right {
+      padding:6rem 4rem;
+      display:flex; flex-direction:column; justify-content:center; gap:1.5rem;
+    }
+
+    /* availability card */
+    .avail-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:2px; padding:1.5rem;
+      display:flex; align-items:center; gap:1rem;
+      transition:border-color 0.3s;
+    }
+    .avail-card:hover { border-color:var(--pink-dim); }
+    .avail-dot-wrap { position:relative; flex-shrink:0; width:12px; height:12px; }
+    .avail-dot {
+      width:12px; height:12px; border-radius:50%;
+      background:var(--pink); position:absolute;
+    }
+    .avail-dot-ring {
+      width:12px; height:12px; border-radius:50%;
+      border:1px solid var(--pink); position:absolute;
+      animation:ripple 2s ease-out infinite;
+    }
+    @keyframes ripple {
+      0%  { transform:scale(1);   opacity:0.8; }
+      100%{ transform:scale(2.8); opacity:0; }
+    }
+    .avail-text { font-size:0.82rem; color:var(--text2); line-height:1.5; }
+    .avail-text strong { color:var(--text); font-weight:500; display:block; margin-bottom:0.15rem; }
+
+    /* info tiles */
+    .contact-tiles { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+    .contact-tile {
+      background:var(--card); padding:1.25rem 1.5rem;
+      transition:background 0.2s;
+    }
+    .contact-tile:hover { background:var(--bg3); }
+    .tile-label { font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--text3); margin-bottom:0.35rem; }
+    .tile-value { font-size:0.88rem; color:var(--text); }
+
+    /* scroll indicator line */
+    .contact-divider-line {
+      width:1px; height:60px; background:linear-gradient(to bottom, var(--pink), transparent);
+      margin:0 auto 1.5rem;
+    }
+
+    @media(max-width:960px){
+      .contact-wrap { grid-template-columns:1fr; }
+      .contact-left { border-right:none; border-bottom:1px solid var(--border); padding:4rem 1.5rem; }
+      .contact-right { padding:3rem 1.5rem; }
+      .contact-tiles { grid-template-columns:1fr; }
+    }
+    @media(max-width:600px){
+      .contact-tiles { grid-template-columns:1fr; }
+    }
 
     footer { padding:1.5rem 4rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
     footer p { font-size:0.72rem; color:var(--text3); letter-spacing:0.06em; }
@@ -593,15 +711,59 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-inner reveal">
-    <p class="section-tag">Contact</p>
-    <h2 class="section-title">Let's<br><em>connect</em></h2>
-    <p class="contact-desc">Feel free to reach out!</p>
-    <a href="mailto:aparnapai247@gmail.com" class="contact-email">aparnapai247@gmail.com</a>
-    <div class="social-links">
-      <a href="https://linkedin.com/in/aparnarpai" target="_blank" class="social-link">LinkedIn ↗</a>
-      <a href="https://github.com/AparnaRameshPai" target="_blank" class="social-link">GitHub ↗</a>
-      <a href="AparnaRameshPai_RESUME.pdf" target="_blank" class="social-link">Resume ↗</a>
+  <div class="contact-grid-bg"></div>
+  <div class="contact-orb contact-orb-1"></div>
+  <div class="contact-orb contact-orb-2"></div>
+
+  <div class="contact-wrap">
+
+    <!-- LEFT — text -->
+    <div class="contact-left reveal">
+      <p class="section-tag">Contact</p>
+      <h2 class="section-title">Let's<br><em>connect</em></h2>
+      <p class="contact-desc">Feel free to reach out!</p>
+      <div class="contact-email-wrap">
+        <div class="contact-email-label">Email me at</div>
+        <a href="mailto:aparnapai247@gmail.com" class="contact-email">aparnapai247@gmail.com</a>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/aparnarpai" target="_blank" class="social-link">LinkedIn ↗</a>
+        <a href="https://github.com/AparnaRameshPai" target="_blank" class="social-link">GitHub ↗</a>
+        <a href="AparnaRameshPai_RESUME.pdf" target="_blank" class="social-link">Resume ↗</a>
+      </div>
+    </div>
+
+    <!-- RIGHT — visual info -->
+    <div class="contact-right reveal">
+
+      <!-- availability -->
+      <div class="avail-card">
+        <div class="avail-dot-wrap">
+          <div class="avail-dot"></div>
+          <div class="avail-dot-ring"></div>
+        </div>
+        <div class="avail-text">
+          <strong>Open to opportunities</strong>
+          Actively seeking data & AI roles in Sweden — available from Summer 2026
+        </div>
+      </div>
+
+      <!-- info tiles -->
+      <div class="contact-tiles">
+        <div class="contact-tile">
+          <div class="tile-label">Role type</div>
+          <div class="tile-value">Full-time · Internship</div>
+        </div>
+        <div class="contact-tile">
+          <div class="tile-label">Response time</div>
+          <div class="tile-value">Within 24–48 hours</div>
+        </div>
+        <div class="contact-tile">
+          <div class="tile-label">Work permit</div>
+          <div class="tile-value">EU / Swedish residence</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
