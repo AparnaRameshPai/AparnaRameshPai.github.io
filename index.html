@@ -71,8 +71,13 @@
     .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:300; letter-spacing:-0.02em; line-height:1.1; color:var(--text); }
 
     /* ABOUT */
-    #about { background:var(--bg2); }
-    .about-grid { display:grid; grid-template-columns:1.3fr 0.7fr; gap:5rem; align-items:start; }
+    #about { background:var(--bg2); position:relative; overflow:hidden; }
+    #about-stars {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      pointer-events:none; z-index:0;
+    }
+    .about-grid { display:grid; grid-template-columns:1.3fr 0.7fr; gap:5rem; align-items:start; position:relative; z-index:1; }
     .about-text p { font-size:1rem; color:var(--text2); line-height:1.9; font-weight:300; }
     .about-text p+p { margin-top:1.25rem; }
     .about-text .hl { color:var(--pink2); font-style:italic; }
@@ -399,7 +404,7 @@
 <body>
 
 <nav>
-  <a href="#" class="nav-logo">Aparna<span>.</span></a>
+  <a href="#" class="nav-logo">Personal portfolio<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -437,7 +442,8 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-header reveal">
+  <canvas id="about-stars"></canvas>
+  <div class="section-header reveal" style="position:relative;z-index:1;">
     <p class="section-tag">About me</p>
     <h2 class="section-title">A little about<br><em>who I am</em></h2>
   </div>
@@ -794,6 +800,60 @@ roadmap using Power BI and analytics platforms</li>
 </footer>
 
 <script>
+  // About section star field
+  (function() {
+    const canvas = document.getElementById('about-stars');
+    const section = document.getElementById('about');
+    if (!canvas || !section) return;
+    const ctx = canvas.getContext('2d');
+    let stars = [], animId;
+
+    function resize() {
+      canvas.width  = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+    }
+
+    function makeStars(n) {
+      stars = [];
+      for (let i = 0; i < n; i++) {
+        stars.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.4 + 0.3,
+          alpha: Math.random(),
+          delta: (Math.random() * 0.005 + 0.001) * (Math.random() < 0.5 ? 1 : -1),
+          pink:  Math.random() < 0.18
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.delta;
+        if (s.alpha <= 0 || s.alpha >= 1) s.delta *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.pink
+          ? `rgba(242,160,192,${s.alpha * 0.75})`
+          : `rgba(232,230,240,${s.alpha * 0.65})`;
+        ctx.fill();
+      });
+      animId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    makeStars(280);
+    draw();
+
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(animId);
+      resize();
+      makeStars(280);
+      draw();
+    });
+  })();
+
   // Contact section star field
   const canvas = document.getElementById('contact-stars');  const section = document.getElementById('contact');
   if (canvas && section) {
